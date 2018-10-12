@@ -3,7 +3,7 @@
 #property strict
 
 #include "../util/util.mqh"
-#include "indicator_metrix.mqh"
+#include "serise_metrix.mqh"
 #include "../core/array.mqh"
 
 // class Config
@@ -220,7 +220,7 @@ class IndicatorArrayGroup
     int m_buffer_size;
     int m_period;
 
-    IndicatorMetrix m_metrx;
+    SeriseMetrix m_metrx;
     Util m_util;
 
     //   private:

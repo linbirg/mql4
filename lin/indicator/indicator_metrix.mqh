@@ -8,7 +8,7 @@
 */
 class IndicatorMetrix
 {
-  private:
+  protected:
     int m_total;
     double m_max;
     double m_min;
@@ -50,7 +50,7 @@ class IndicatorMetrix
     void get_occpy(double &dist[]);
     void get_step(double &dist[]);
 
-  private:
+  protected:
     void calc_min_max(const double &src[], int size);
     void count_occpy(const double &src[], int size);
     void count_step();
