@@ -207,11 +207,11 @@ bool Boll::is_long()
     // bool is_main_smooth = m_mainIndicator.is_smooth();
     // bool is_lower_smooth = m_lowerIndicator.is_smooth();
 
-    Print("Boll::is_long:" +
-          " period:" + m_frame +
-          //   " is_upper_acc_up:" + is_upper_acc_up +
-          " is_main_multi_up:" + is_main_multi_up +
-          " is_band_in_mid:" + is_band_in_mid);
+    // Print("Boll::is_long:" +
+    //       " period:" + m_frame +
+    //       //   " is_upper_acc_up:" + is_upper_acc_up +
+    //       " is_main_multi_up:" + is_main_multi_up +
+    //       " is_band_in_mid:" + is_band_in_mid);
 
     // return (is_upper_acc_up && is_main_acc_up) && (is_band_in_mid);
     return (is_main_multi_up) && (is_band_in_mid); // && m_bandIndicator.is_acc_up()
@@ -224,10 +224,10 @@ bool Boll::is_short()
     // return (m_lowerIndicator.is_acc_down() && m_mainIndicator.is_acc_down()) && (m_bandIndicator.is_in_middle());
     bool is_main_multi_down = m_mainIndicator.is_multi_down();
     bool is_band_in_mid = m_bandIndicator.is_in_middle();
-    Print("Boll::is_short:" +
-          " period:" + m_frame +
-          " is_main_multi_down:" + is_main_multi_down +
-          " is_band_in_mid:" + is_band_in_mid);
+    // Print("Boll::is_short:" +
+    //       " period:" + m_frame +
+    //       " is_main_multi_down:" + is_main_multi_down +
+    //       " is_band_in_mid:" + is_band_in_mid);
     return (is_main_multi_down) && (is_band_in_mid);
     //   &&m_bandIndicator.is_acc_up();
 }
