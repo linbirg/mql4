@@ -40,7 +40,7 @@ class TArray
         return true;
     };
 
-    T operator[](int index)
+    T operator[](int index) const
     {
         static T invalid_index;
         //---
@@ -50,10 +50,15 @@ class TArray
         return (m_data[index]);
     };
 
-    int size()
+    int size() const
     {
         return ArraySize(m_data);
     };
+
+    // T* get_buf() const
+    // {
+    //     return GetPointer(m_data);
+    // }
 };
 
 //+------------------------------------------------------------------+

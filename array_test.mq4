@@ -45,7 +45,7 @@ void test_arr_ser_shift()
 
     for (int i = 0; i < d_s_arr.size(); i++)
     {
-        Print("index:" + i + " d_arr:" + d_s_arr[i]);
+        Print("index:" + i + " d_arr:" + fabs(d_s_arr[i]));
     }
 }
 // TArray<double> d_arr;

@@ -17,26 +17,26 @@ class SeriseMetrix : public IndicatorMetrix
     SeriseArrayHelper m_serise_helper;
 
   public:
-    SeriseMetrix(/* args */);
-    ~SeriseMetrix();
+    SeriseMetrix(/* args */){};
+    ~SeriseMetrix(){};
 
   public:
-    void compute(const TArraySerise &serise);
-    void computeAbs(const TArraySerise &serise);
+    void compute(TArraySerise<double> &serise);
+    void computeAbs(TArraySerise<double> &serise);
 
   protected:
-    void count_occpy(const TArraySerise &serise);
-    void calc_min_max(const TArraySerise &serise);
+    void count_occpy(TArraySerise<double> &serise);
+    void calc_min_max(TArraySerise<double> &serise);
 };
 
-void SeriseMetrix::compute(const TArraySerise &serise)
+void SeriseMetrix::compute(TArraySerise<double> &serise)
 {
     calc_min_max(serise);
     count_step();
     count_occpy(serise);
 }
 
-void SeriseMetrix::calc_min_max(const TArraySerise &serise)
+void SeriseMetrix::calc_min_max(TArraySerise<double> &serise)
 {
     // 应该用全局或者静态常量
     const double DEFUALT_MAX = 999999999;
@@ -72,7 +72,7 @@ void SeriseMetrix::calc_min_max(const TArraySerise &serise)
     }
 }
 
-void SeriseMetrix::count_occpy(const TArraySerise &serise)
+void SeriseMetrix::count_occpy(TArraySerise<double> &serise)
 {
     double delta = (m_max - m_min) / (m_step_size - 1);
 
@@ -90,9 +90,9 @@ void SeriseMetrix::count_occpy(const TArraySerise &serise)
     }
 }
 
-void SeriseMetrix::computeAbs(const TArraySerise &serise)
+void SeriseMetrix::computeAbs(TArraySerise<double> &serise)
 {
-    TArraySerise dist;
+    TArraySerise<double> dist;
     m_serise_helper.abs(dist, serise);
     compute(dist);
 }

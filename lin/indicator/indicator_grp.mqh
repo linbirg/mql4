@@ -182,19 +182,19 @@ class IndicatorArrayGroup
     bool is_acc_in_low();
     bool is_speed_in_low();
 
-  public:
-    void getIndicator(double &dist[]) { m_util.copy(dist, m_indicator, m_buffer_size); };
-    void getIndicatorMa(double &dist[]) { m_util.copy(dist, m_indicator_ma, m_buffer_size); };
+    //   public:
+    //     void getIndicator(double &dist[]) { m_util.copy(dist, m_indicator, m_buffer_size); };
+    //     void getIndicatorMa(double &dist[]) { m_util.copy(dist, m_indicator_ma, m_buffer_size); };
 
-    void getIndicatorStd(double &dist[]) { m_util.copy(dist, m_indicator_std, m_buffer_size); };
+    //     void getIndicatorStd(double &dist[]) { m_util.copy(dist, m_indicator_std, m_buffer_size); };
 
-    void getSpeed(double &dist[]) { m_util.copy(dist, m_speed, m_buffer_size); };
-    void getSpeedMa(double &dist[]) { m_util.copy(dist, m_speed_ma, m_buffer_size); };
-    void getSpeedStd(double &dist[]) { m_util.copy(dist, m_speed_std, m_buffer_size); };
+    //     void getSpeed(double &dist[]) { m_util.copy(dist, m_speed, m_buffer_size); };
+    //     void getSpeedMa(double &dist[]) { m_util.copy(dist, m_speed_ma, m_buffer_size); };
+    //     void getSpeedStd(double &dist[]) { m_util.copy(dist, m_speed_std, m_buffer_size); };
 
-    void getAcc(double &dist[]) { m_util.copy(dist, m_acceleration, m_buffer_size); };
-    void getAccMa(double &dist[]) { m_util.copy(dist, m_acceleration_ma, m_buffer_size); };
-    void getAccStd(double &dist[]) { m_util.copy(dist, m_acceleration_std, m_buffer_size); };
+    //     void getAcc(double &dist[]) { m_util.copy(dist, m_acceleration, m_buffer_size); };
+    //     void getAccMa(double &dist[]) { m_util.copy(dist, m_acceleration_ma, m_buffer_size); };
+    //     void getAccStd(double &dist[]) { m_util.copy(dist, m_acceleration_std, m_buffer_size); };
 
   private:
     void init_buffer();
@@ -608,7 +608,7 @@ bool IndicatorArrayGroup::is_up()
     }
 
     m_metrx.reset();
-    m_metrx.computeAbs(m_speed, m_buffer_size);
+    m_metrx.computeAbs(m_speed);
 
     bool is_up = m_speed[0] > 0 && m_metrx.is_middle_area(m_speed[0]);
     // bool is_up = m_speed[0] > m_config.m_speed.m_ind.m_mid_low;
@@ -626,7 +626,7 @@ bool IndicatorArrayGroup::is_down()
     }
 
     m_metrx.reset();
-    m_metrx.computeAbs(m_speed, m_buffer_size);
+    m_metrx.computeAbs(m_speed);
 
     bool is_down = m_speed[0] < 0 && m_metrx.is_middle_area(-m_speed[0]);
     // bool is_down = m_speed[0] < -m_config.m_speed.m_ind.m_mid_low;
@@ -646,7 +646,7 @@ bool IndicatorArrayGroup::is_multi_up(int cnt = 3)
     }
 
     m_metrx.reset();
-    m_metrx.computeAbs(m_speed, m_buffer_size);
+    m_metrx.computeAbs(m_speed);
 
     // 所有速度都必须在mid区域，不能太小或者太大。(暂时只考虑不能太小)
     for (int i = 0; i < cnt; i++)
@@ -673,7 +673,7 @@ bool IndicatorArrayGroup::is_multi_down(int cnt = 3)
     }
 
     m_metrx.reset();
-    m_metrx.computeAbs(m_speed, m_buffer_size);
+    m_metrx.computeAbs(m_speed);
 
     // 所有速度都必须在mid区域，不能太小或者太大。
     for (int i = 0; i < cnt; i++)
@@ -699,7 +699,7 @@ bool IndicatorArrayGroup::is_acc()
     }
 
     m_metrx.reset();
-    m_metrx.computeAbs(m_acceleration, m_buffer_size);
+    m_metrx.computeAbs(m_acceleration);
 
     bool is_acc = m_acceleration[0] > 0 && m_metrx.is_middle_area(m_acceleration[0], 90);
     // bool is_acc = m_acceleration[0] > m_config.m_acc.m_ind.m_mid_low;
@@ -718,7 +718,7 @@ bool IndicatorArrayGroup::is_dece()
     }
 
     m_metrx.reset();
-    m_metrx.computeAbs(m_acceleration, m_buffer_size);
+    m_metrx.computeAbs(m_acceleration);
 
     bool is_dece = m_acceleration[0] < 0 && m_metrx.is_middle_area(-m_acceleration[0], 90);
     // bool is_dece = m_acceleration[0] < -m_config.m_acc.m_ind.m_mid_low;
@@ -761,12 +761,12 @@ bool IndicatorArrayGroup::is_acc_down()
 */
 bool IndicatorArrayGroup::is_in_middle()
 {
-    // m_metrx.reset();
-    // m_metrx.compute(m_indicator, m_buffer_size);
+    m_metrx.reset();
+    m_metrx.compute(m_indicator);
     // Print("is_in_middle:" + m_metrx.format_to_str());
-    // return m_metrx.is_middle_area(m_indicator[0], occpy);
-    return fabs(m_indicator[0]) > m_config.m_indicator.m_ind.m_mid_low &&
-           fabs(m_indicator[0]) < m_config.m_indicator.m_ind.m_mid_high;
+    return m_metrx.is_middle_area(m_indicator[0]);
+    // return fabs(m_indicator[0]) > m_config.m_indicator.m_ind.m_mid_low &&
+    //        fabs(m_indicator[0]) < m_config.m_indicator.m_ind.m_mid_high;
 }
 
 /**
@@ -774,11 +774,11 @@ bool IndicatorArrayGroup::is_in_middle()
 */
 bool IndicatorArrayGroup::is_in_low()
 {
-    // m_metrx.reset();
-    // m_metrx.compute(m_indicator, m_buffer_size);
+    m_metrx.reset();
+    m_metrx.compute(m_indicator);
 
-    // return m_metrx.is_low_area(m_indicator[0]);
-    return fabs(m_indicator[0]) < m_config.m_indicator.m_ind.m_mid_low;
+    return m_metrx.is_low_area(m_indicator[0]);
+    // return fabs(m_indicator[0]) < m_config.m_indicator.m_ind.m_mid_low;
 }
 
 /**
@@ -786,30 +786,30 @@ bool IndicatorArrayGroup::is_in_low()
 */
 bool IndicatorArrayGroup::is_in_high()
 {
-    // m_metrx.reset();
-    // m_metrx.compute(m_indicator, m_buffer_size);
-    // // Print("is_in_high:" + m_metrx.format_to_str());
-    // return m_metrx.is_high_area(m_indicator[0]);
-    return fabs(m_indicator[0]) > m_config.m_indicator.m_ind.m_mid_high;
+    m_metrx.reset();
+    m_metrx.compute(m_indicator);
+    // Print("is_in_high:" + m_metrx.format_to_str());
+    return m_metrx.is_high_area(m_indicator[0]);
+    // return fabs(m_indicator[0]) > m_config.m_indicator.m_ind.m_mid_high;
 }
 
 bool IndicatorArrayGroup::is_speed_in_low()
 {
-    // m_metrx.reset();
-    // m_metrx.computeAbs(m_speed, m_buffer_size);
-    // // Print("is_speed_in_low:" + m_metrx.format_to_str());
+    m_metrx.reset();
+    m_metrx.computeAbs(m_speed);
+    // Print("is_speed_in_low:" + m_metrx.format_to_str());
 
-    // return m_metrx.is_low_area(fabs(m_speed[0]), occpy);
-    return fabs(m_speed[0]) < m_config.m_speed.m_ind.m_mid_low;
+    return m_metrx.is_low_area(fabs(m_speed[0]));
+    // return fabs(m_speed[0]) < m_config.m_speed.m_ind.m_mid_low;
 }
 
 bool IndicatorArrayGroup::is_acc_in_low()
 {
-    // m_metrx.reset();
-    // m_metrx.computeAbs(m_acceleration, m_buffer_size);
+    m_metrx.reset();
+    m_metrx.computeAbs(m_acceleration);
 
-    // return m_metrx.is_low_area(fabs(m_acceleration[0]), occpy);
-    return fabs(m_acceleration[0]) < m_config.m_acc.m_ind.m_mid_low;
+    return m_metrx.is_low_area(fabs(m_acceleration[0]));
+    // return fabs(m_acceleration[0]) < m_config.m_acc.m_ind.m_mid_low;
 }
 
 //走平（速度和加速度都很小，甚至为很小的负数）

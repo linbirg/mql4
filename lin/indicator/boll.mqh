@@ -25,7 +25,7 @@ class Boll
 
         m_buffer_size = 1000;
         reset_buf();
-        init_config();
+        //init_config();
 
         m_start_time = iTime(NULL, m_frame, m_buffer_size);
     };
@@ -141,9 +141,9 @@ void Boll::calc()
 {
     nec_calc_band();
 
-    m_upperIndicator.calc();
-    m_mainIndicator.calc();
-    m_lowerIndicator.calc();
+    // m_upperIndicator.calc();
+    // m_mainIndicator.calc();
+    // m_lowerIndicator.calc();
 }
 
 /**
