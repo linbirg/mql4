@@ -1,0 +1,50 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile-Project-X",
+            "type": "shell",
+            "command": "C:\\Users\\Acme\\AppData\\Roaming\\MetaQuotes\\Terminal\\83D4764E0403A8685E84D6FCAB361879\\MQL5\\Compile-MQL.ps1  C:\\Users\\Acme\\AppData\\Roaming\\MetaQuotes\\Terminal\\83D4764E0403A8685E84D6FCAB361879\\MQL5\\Experts\\ProjectX\\ProjectX.mq5",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false
+            }
+        },
+        {
+            "label": "Compile-MQL",
+            "type": "shell",
+            "command": "C:\\Users\\Acme\\AppData\\Roaming\\MetaQuotes\\Terminal\\83D4764E0403A8685E84D6FCAB361879\\MQL5\\Compile-MQL.ps1 ${file}",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "launch_offline_help",
+            "type": "shell",
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false
+            },
+            "command": "hh.exe",
+            "args": [
+                "mk:@MSITStore:C:\\Users\\linbirg\\AppData\\Roaming\\MetaQuotes\\Terminal\\Help\\mql4.chm::/${selectedText}.htm"
+            ]
+        }
+    ]
+}
