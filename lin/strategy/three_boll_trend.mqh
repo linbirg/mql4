@@ -145,6 +145,13 @@ string ThreeBollTrendStrategy::print_market_state()
 void ThreeBollTrendStrategy::checkForOpen()
 {
   Print("checkForOpen");
+
+  if (!isLastLostAndPassed())
+  {
+    Print("checkForOpen：上笔订单亏损，一段时间内不再开仓交易。");
+    return;
+  }
+
   if (has_chance_for_long())
   {
     open_long();
