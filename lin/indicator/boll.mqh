@@ -246,22 +246,12 @@ bool Boll::is_flat()
 */
 class Boll5M : public Boll
 {
-    //   private:
-    //     IndiGrpConfig m_mainIndConf;
-    //     IndiGrpConfig m_upperIndConf;
-    //     IndiGrpConfig m_lowerIndConf;
-    //     IndiGrpConfig m_bandIndConf;
-
   public:
     Boll5M(/* args */);
     ~Boll5M();
 
   private:
     void init();
-    // void init_main_conf();
-    // void init_upper_conf();
-    // void init_lower_conf();
-    // void init_band_conf();
 };
 
 Boll5M::Boll5M(/* args */)
@@ -276,74 +266,7 @@ Boll5M::~Boll5M()
 void Boll5M::init()
 {
     setTimeFrame(5);
-    // setBufferSize(20);
-    // init_main_conf();
-    // init_upper_conf();
-    // init_lower_conf();
-    // init_band_conf();
 }
-
-// void Boll5M::init_main_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     main_conf.m_indicator.m_ind.m_mid_low = 0.957665;
-//     main_conf.m_indicator.m_ind.m_mid_high = 0.970237;
-//     main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     main_conf.m_speed.m_ind.m_mid_low = 0.00003;
-//     main_conf.m_speed.m_ind.m_mid_high = 0.00027;
-
-//     main_conf.m_acc.m_ind.m_mid_low = 0.000005;
-
-//     setMainIndConfig(main_conf);
-// };
-// void Boll5M::init_upper_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     main_conf.m_indicator.m_ind.m_mid_low = 0.957665;
-//     main_conf.m_indicator.m_ind.m_mid_high = 0.970237;
-//     main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     main_conf.m_speed.m_ind.m_mid_low = 0.000015;
-//     main_conf.m_speed.m_ind.m_mid_high = 0.0003;
-
-//     main_conf.m_acc.m_ind.m_mid_low = 0.00001;
-//     setUpperIndConfig(main_conf);
-// };
-// void Boll5M::init_lower_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     main_conf.m_indicator.m_ind.m_mid_low = 0.957665;
-//     main_conf.m_indicator.m_ind.m_mid_high = 0.970237;
-//     main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     main_conf.m_speed.m_ind.m_mid_low = 0.00003;
-//     main_conf.m_speed.m_ind.m_mid_high = 0.00027;
-
-//     main_conf.m_acc.m_ind.m_mid_low = 0.000015;
-//     setLowerIndConfig(main_conf);
-// };
-// void Boll5M::init_band_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     main_conf.m_indicator.m_ind.m_mid_low = 0.0008;
-//     main_conf.m_indicator.m_ind.m_mid_high = 0.0049;
-//     main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     main_conf.m_speed.m_ind.m_mid_low = 0.000008;
-//     main_conf.m_speed.m_ind.m_mid_high = 0.00026;
-
-//     main_conf.m_acc.m_ind.m_mid_low = 0.0000013;
-//     setBandIndConfig(main_conf);
-// };
 
 /**
  * 
@@ -351,22 +274,12 @@ void Boll5M::init()
 */
 class Boll15M : public Boll
 {
-    //   private:
-    //     IndiGrpConfig m_mainIndConf;
-    //     IndiGrpConfig m_upperIndConf;
-    //     IndiGrpConfig m_lowerIndConf;
-    //     IndiGrpConfig m_bandIndConf;
-
   public:
     Boll15M(/* args */);
     ~Boll15M();
 
   private:
     void init();
-    // void init_main_conf();
-    // void init_upper_conf();
-    // void init_lower_conf();
-    // void init_band_conf();
 };
 
 Boll15M::Boll15M(/* args */)
@@ -381,74 +294,7 @@ Boll15M::~Boll15M()
 void Boll15M::init()
 {
     setTimeFrame(15);
-    // setBufferSize(20);
-    // init_main_conf();
-    // init_upper_conf();
-    // init_lower_conf();
-    // init_band_conf();
 }
-
-// void Boll15M::init_main_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     main_conf.m_indicator.m_ind.m_mid_low = 0.957665;
-//     main_conf.m_indicator.m_ind.m_mid_high = 0.970237;
-//     main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     main_conf.m_speed.m_ind.m_mid_low = 0.00005;
-//     main_conf.m_speed.m_ind.m_mid_high = 0.000369;
-
-//     main_conf.m_acc.m_ind.m_mid_low = 0.00003;
-
-//     setMainIndConfig(main_conf);
-// };
-// void Boll15M::init_upper_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     main_conf.m_indicator.m_ind.m_mid_low = 0.957665;
-//     main_conf.m_indicator.m_ind.m_mid_high = 0.970237;
-//     main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     main_conf.m_speed.m_ind.m_mid_low = 0.00005;
-//     main_conf.m_speed.m_ind.m_mid_high = 0.000369;
-
-//     main_conf.m_acc.m_ind.m_mid_low = 0.00003;
-//     setUpperIndConfig(main_conf);
-// };
-// void Boll15M::init_lower_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     main_conf.m_indicator.m_ind.m_mid_low = 0.957665;
-//     main_conf.m_indicator.m_ind.m_mid_high = 0.970237;
-//     main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     main_conf.m_speed.m_ind.m_mid_low = 0.00005;
-//     main_conf.m_speed.m_ind.m_mid_high = 0.000369;
-
-//     main_conf.m_acc.m_ind.m_mid_low = 0.00003;
-//     setLowerIndConfig(main_conf);
-// };
-// void Boll15M::init_band_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     main_conf.m_indicator.m_ind.m_mid_low = 0.001;
-//     main_conf.m_indicator.m_ind.m_mid_high = 0.0049;
-//     main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     main_conf.m_speed.m_ind.m_mid_low = 0.000008;
-//     main_conf.m_speed.m_ind.m_mid_high = 0.00026;
-
-//     main_conf.m_acc.m_ind.m_mid_low = 0.0000013;
-//     setBandIndConfig(main_conf);
-// };
 
 /**
  * 
@@ -460,22 +306,12 @@ void Boll15M::init()
 */
 class Boll1H : public Boll
 {
-    //   private:
-    //     IndiGrpConfig m_mainIndConf;
-    //     IndiGrpConfig m_upperIndConf;
-    //     IndiGrpConfig m_lowerIndConf;
-    //     IndiGrpConfig m_bandIndConf;
-
   public:
     Boll1H(/* args */);
     ~Boll1H();
 
   private:
     void init();
-    // void init_main_conf();
-    // void init_upper_conf();
-    // void init_lower_conf();
-    // void init_band_conf();
 };
 
 Boll1H::Boll1H(/* args */)
@@ -490,75 +326,7 @@ Boll1H::~Boll1H()
 void Boll1H::init()
 {
     setTimeFrame(60);
-    // setBufferSize(20);
-    // init_main_conf();
-    // init_upper_conf();
-    // init_lower_conf();
-    // init_band_conf();
 }
-
-// void Boll1H::init_main_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     // main_conf.m_indicator.m_ind.m_mid_low = 0.957665;
-//     // main_conf.m_indicator.m_ind.m_mid_high = 0.970237;
-//     // main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     // main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     main_conf.m_speed.m_ind.m_mid_low = 0.00003;
-//     main_conf.m_speed.m_ind.m_mid_high = 0.000439;
-
-//     main_conf.m_acc.m_ind.m_mid_low = 0.00003;
-
-//     setMainIndConfig(main_conf);
-// };
-// void Boll1H::init_upper_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     // main_conf.m_indicator.m_ind.m_mid_low = 0.957665;
-//     // main_conf.m_indicator.m_ind.m_mid_high = 0.970237;
-//     // main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     // main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     main_conf.m_speed.m_ind.m_mid_low = 0.00005;
-//     main_conf.m_speed.m_ind.m_mid_high = 0.000739;
-
-//     main_conf.m_acc.m_ind.m_mid_low = 0.00003;
-//     setUpperIndConfig(main_conf);
-// };
-// void Boll1H::init_lower_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     // main_conf.m_indicator.m_ind.m_mid_low = 0.957665;
-//     // main_conf.m_indicator.m_ind.m_mid_high = 0.970237;
-//     // main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     // main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     main_conf.m_speed.m_ind.m_mid_low = 0.00005;
-//     main_conf.m_speed.m_ind.m_mid_high = 0.000739;
-
-//     main_conf.m_acc.m_ind.m_mid_low = 0.00003;
-//     setLowerIndConfig(main_conf);
-// };
-// void Boll1H::init_band_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     main_conf.m_indicator.m_ind.m_mid_low = 0.00182;
-//     main_conf.m_indicator.m_ind.m_mid_high = 0.01234;
-
-//     // main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     // main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     // main_conf.m_speed.m_ind.m_mid_low = 0.000008;
-//     // main_conf.m_speed.m_ind.m_mid_high = 0.00026;
-
-//     // main_conf.m_acc.m_ind.m_mid_low = 0.0000013;
-//     setBandIndConfig(main_conf);
-// };
 
 /**
  * 
@@ -566,22 +334,12 @@ void Boll1H::init()
 */
 class Boll4H : public Boll
 {
-    //   private:
-    //     IndiGrpConfig m_mainIndConf;
-    //     IndiGrpConfig m_upperIndConf;
-    //     IndiGrpConfig m_lowerIndConf;
-    //     IndiGrpConfig m_bandIndConf;
-
   public:
     Boll4H(/* args */);
     ~Boll4H();
 
   private:
     void init();
-    // void init_main_conf();
-    // void init_upper_conf();
-    // void init_lower_conf();
-    // void init_band_conf();
 };
 
 Boll4H::Boll4H(/* args */)
@@ -596,75 +354,7 @@ Boll4H::~Boll4H()
 void Boll4H::init()
 {
     setTimeFrame(240);
-    // setBufferSize(20);
-    // init_main_conf();
-    // init_upper_conf();
-    // init_lower_conf();
-    // init_band_conf();
 }
-
-// void Boll4H::init_main_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     // main_conf.m_indicator.m_ind.m_mid_low = 0.957665;
-//     // main_conf.m_indicator.m_ind.m_mid_high = 0.970237;
-//     // main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     // main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     main_conf.m_speed.m_ind.m_mid_low = 0.00003;
-//     main_conf.m_speed.m_ind.m_mid_high = 0.0008885;
-
-//     main_conf.m_acc.m_ind.m_mid_low = 0.00003;
-
-//     setMainIndConfig(main_conf);
-// };
-// void Boll4H::init_upper_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     // main_conf.m_indicator.m_ind.m_mid_low = 0.957665;
-//     // main_conf.m_indicator.m_ind.m_mid_high = 0.970237;
-//     // main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     // main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     main_conf.m_speed.m_ind.m_mid_low = 0.00009;
-//     main_conf.m_speed.m_ind.m_mid_high = 0.002;
-
-//     main_conf.m_acc.m_ind.m_mid_low = 0.00006;
-//     setUpperIndConfig(main_conf);
-// };
-// void Boll4H::init_lower_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     // main_conf.m_indicator.m_ind.m_mid_low = 0.957665;
-//     // main_conf.m_indicator.m_ind.m_mid_high = 0.970237;
-//     // main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     // main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     main_conf.m_speed.m_ind.m_mid_low = 0.00009;
-//     main_conf.m_speed.m_ind.m_mid_high = 0.00016;
-
-//     main_conf.m_acc.m_ind.m_mid_low = 0.00008;
-//     setLowerIndConfig(main_conf);
-// };
-// void Boll4H::init_band_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     main_conf.m_indicator.m_ind.m_mid_low = 0.004;
-//     main_conf.m_indicator.m_ind.m_mid_high = 0.01234;
-
-//     // main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     // main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     // main_conf.m_speed.m_ind.m_mid_low = 0.000008;
-//     // main_conf.m_speed.m_ind.m_mid_high = 0.00026;
-
-//     // main_conf.m_acc.m_ind.m_mid_low = 0.0000013;
-//     setBandIndConfig(main_conf);
-// };
 
 /**
  * 
@@ -672,22 +362,12 @@ void Boll4H::init()
 */
 class Boll1D : public Boll
 {
-    //   private:
-    //     IndiGrpConfig m_mainIndConf;
-    //     IndiGrpConfig m_upperIndConf;
-    //     IndiGrpConfig m_lowerIndConf;
-    //     IndiGrpConfig m_bandIndConf;
-
   public:
     Boll1D(/* args */);
     ~Boll1D();
 
   private:
     void init();
-    // void init_main_conf();
-    // void init_upper_conf();
-    // void init_lower_conf();
-    // void init_band_conf();
 };
 
 Boll1D::Boll1D(/* args */)
@@ -702,72 +382,4 @@ Boll1D::~Boll1D()
 void Boll1D::init()
 {
     setTimeFrame(1440);
-    // setBufferSize(20);
-    // init_main_conf();
-    // init_upper_conf();
-    // init_lower_conf();
-    // init_band_conf();
 }
-
-// void Boll1D::init_main_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     // main_conf.m_indicator.m_ind.m_mid_low = 0.957665;
-//     // main_conf.m_indicator.m_ind.m_mid_high = 0.970237;
-//     // main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     // main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     main_conf.m_speed.m_ind.m_mid_low = 0.00032;
-//     main_conf.m_speed.m_ind.m_mid_high = 0.003;
-
-//     main_conf.m_acc.m_ind.m_mid_low = 0.00003;
-
-//     setMainIndConfig(main_conf);
-// };
-// void Boll1D::init_upper_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     // main_conf.m_indicator.m_ind.m_mid_low = 0.957665;
-//     // main_conf.m_indicator.m_ind.m_mid_high = 0.970237;
-//     // main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     // main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     main_conf.m_speed.m_ind.m_mid_low = 0.0008;
-//     main_conf.m_speed.m_ind.m_mid_high = 0.006;
-
-//     main_conf.m_acc.m_ind.m_mid_low = 0.0006;
-//     setUpperIndConfig(main_conf);
-// };
-// void Boll1D::init_lower_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     // main_conf.m_indicator.m_ind.m_mid_low = 0.957665;
-//     // main_conf.m_indicator.m_ind.m_mid_high = 0.970237;
-//     // main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     // main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     main_conf.m_speed.m_ind.m_mid_low = 0.0001;
-//     main_conf.m_speed.m_ind.m_mid_high = 0.005;
-
-//     main_conf.m_acc.m_ind.m_mid_low = 0.00025;
-//     setLowerIndConfig(main_conf);
-// };
-// void Boll1D::init_band_conf()
-// {
-//     IndiGrpConfig main_conf;
-
-//     main_conf.m_indicator.m_ind.m_mid_low = 0.015;
-//     main_conf.m_indicator.m_ind.m_mid_high = 0.097;
-
-//     // main_conf.m_indicator.m_ind_std.m_mid_low = 0.000026;
-//     // main_conf.m_indicator.m_ind_std.m_mid_high = 0.0017;
-
-//     // main_conf.m_speed.m_ind.m_mid_low = 0.000008;
-//     // main_conf.m_speed.m_ind.m_mid_high = 0.00026;
-
-//     // main_conf.m_acc.m_ind.m_mid_low = 0.0000013;
-//     setBandIndConfig(main_conf);
-// };

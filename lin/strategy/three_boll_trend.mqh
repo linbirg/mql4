@@ -66,7 +66,7 @@ ThreeBollTrendStrategy::ThreeBollTrendStrategy(/* args */)
   // m_boll15M.setTimeFrame(PERIOD_M15);
   // m_boll15M.setTimeFrame(PERIOD_M5);
 
-  m_stopManager.setTrailingStop(80);
+  m_stopManager.setTrailingStop(100);
 }
 
 ThreeBollTrendStrategy::~ThreeBollTrendStrategy()
@@ -146,7 +146,7 @@ void ThreeBollTrendStrategy::checkForOpen()
 {
   Print("checkForOpen");
 
-  if (!isLastLostAndPassed())
+  if (!m_positionManager.is_last_lost_and_passed())
   {
     Print("checkForOpen：上笔订单亏损，一段时间内不再开仓交易。");
     return;
