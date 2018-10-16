@@ -66,7 +66,7 @@ ThreeBollTrendStrategy::ThreeBollTrendStrategy(/* args */)
   // m_boll15M.setTimeFrame(PERIOD_M15);
   // m_boll15M.setTimeFrame(PERIOD_M5);
 
-  m_stopManager.setTrailingStop(100);
+  m_stopManager.setTrailingStop(300);
 }
 
 ThreeBollTrendStrategy::~ThreeBollTrendStrategy()
@@ -195,14 +195,14 @@ void ThreeBollTrendStrategy::calcStopLoss()
 */
 bool ThreeBollTrendStrategy::has_chance_for_long()
 {
-  //m_bollDay.is_long() &&
-  return m_boll4H.is_long() && m_boll1H.is_long() && m_boll15M.is_long();
+  //m_bollDay.is_long() &&m_boll4H.is_long() &&
+  return m_boll1H.is_long() && m_boll15M.is_long();
 }
 
 bool ThreeBollTrendStrategy::has_chance_for_short()
 {
-  //m_bollDay.is_short() &&
-  return m_boll4H.is_short() && m_boll1H.is_short() && m_boll15M.is_short();
+  //m_bollDay.is_short() &&m_boll4H.is_short() &&
+  return m_boll1H.is_short() && m_boll15M.is_short();
 }
 
 void ThreeBollTrendStrategy::open_long()

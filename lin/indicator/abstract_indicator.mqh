@@ -23,7 +23,7 @@ class Abstractindicator : public IIndicator
 
     virtual string format_to_str() { return ""; };
 
-    virtual void setTimeFrame(int frame){};
+    virtual void setTimeFrame(int frame) { m_frame = frame; };
     virtual void setBufferSize(int size);
 };
 
