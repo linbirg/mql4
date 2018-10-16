@@ -251,17 +251,6 @@ void IndicatorArrayGroup::init_buffer()
     m_acceleration.set_max_size(max_size);
     m_acceleration_ma.set_max_size(max_size);
     m_acceleration_std.set_max_size(max_size);
-
-    // ArrayResize(m_indicator_ma, m_buffer_size);
-    // ArrayResize(m_indicator_std, m_buffer_size);
-
-    // ArrayResize(m_speed, m_buffer_size);
-    // ArrayResize(m_speed_ma, m_buffer_size);
-    // ArrayResize(m_speed_std, m_buffer_size);
-
-    // ArrayResize(m_acceleration, m_buffer_size);
-    // ArrayResize(m_acceleration_ma, m_buffer_size);
-    // ArrayResize(m_acceleration_std, m_buffer_size);
 }
 
 void IndicatorArrayGroup::resize(int size)

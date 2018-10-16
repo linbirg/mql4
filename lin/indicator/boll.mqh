@@ -8,13 +8,14 @@
 #property strict
 
 #include "indicator_grp.mqh"
+#include "../core/indicator_interface.mqh"
 
 /**
  * 基于Boll指标的自定义指标，除了boll指标本身，还存储boll上线轨的速度、加速度等指标。 
  * 
  * 
 */
-class Boll
+class Boll : public IIndicator
 {
   public:
     Boll()

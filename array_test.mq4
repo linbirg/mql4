@@ -9,6 +9,7 @@
 #property strict
 
 #include "lin/core/array.mqh"
+#include "lin/indicator/ma.mqh"
 
 //+------------------------------------------------------------------+
 //| Expert initialization function                                   |
@@ -48,13 +49,23 @@ void test_arr_ser_shift()
         Print("index:" + i + " d_arr:" + fabs(d_s_arr[i]));
     }
 }
+
+DoubleMA4H doubleMA1H;
+void test_doubleMA()
+{
+    doubleMA1H.calc();
+    Comment("doubleMA:is_long:" + doubleMA1H.is_long() + " is_short:" + doubleMA1H.is_short() + " is flat:" + doubleMA1H.is_flat() + "\t\n" + doubleMA1H.format_to_str());
+}
+
 // TArray<double> d_arr;
 //+------------------------------------------------------------------+
 //| Expert tick function                                             |
 //+------------------------------------------------------------------+
 void OnTick()
 {
-    test_arr_ser_shift();
+
+    test_doubleMA();
+    // test_arr_ser_shift();
     // d_arr.append(1);
     // Print("append befroe size:" + d_arr.size());
     // long tick = GetTickCount();
