@@ -66,7 +66,7 @@ ThreeBollTrendStrategy::ThreeBollTrendStrategy(/* args */)
   // m_boll15M.setTimeFrame(PERIOD_M15);
   // m_boll15M.setTimeFrame(PERIOD_M5);
 
-  m_stopManager.setTrailingStop(300);
+  m_stopManager.setTrailingStop(200);
 }
 
 ThreeBollTrendStrategy::~ThreeBollTrendStrategy()
@@ -84,11 +84,34 @@ ThreeBollTrendStrategy::onTick()
   }
   else
   {
-    // checkForScale();
+    checkForScale();
     checkForClose();
   }
 
   calcStopLoss();
+}
+
+void ThreeBollTrendStrategy::checkForScale()
+{
+
+  if (m_positionManager.get_curr_orders() == 0)
+  {
+    return;
+  }
+
+  if (m_positionManager.is_current_opened())
+  {
+    Print("CheckForScaleIn:当前周期已经开过仓位");
+    return;
+  }
+
+  if (!m_positionManager.is_stop_cover_trailing_profit())
+  {
+    Print("checkForScale:止损位没有覆盖开仓后的移动止损价格.");
+    return;
+  }
+
+  checkForOpen();
 }
 
 void ThreeBollTrendStrategy::flush_bolls()
