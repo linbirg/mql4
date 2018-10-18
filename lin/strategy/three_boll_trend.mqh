@@ -105,7 +105,7 @@ void ThreeBollTrendStrategy::checkForScale()
     return;
   }
 
-  if (!m_positionManager.is_stop_cover_trailing_profit())
+  if (!m_stopManager.is_stop_cover_trailing_profit())
   {
     Print("checkForScale:止损位没有覆盖开仓后的移动止损价格.");
     return;

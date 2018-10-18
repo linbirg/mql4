@@ -938,45 +938,76 @@
 //     }
 // }
 
-class S2LMacdBiasStragy
+// #include "../util/time_util.mqh"
+// #include "../position/position_manager.mqh"
+// #include "../position/stop_manager.mqh"
+
+#include "abstract_strategy.mqh"
+#include "../indicator/ma.mqh"
+
+class S2LMacdBiasStragy : public AbstractStrategy
 {
   private:
-    /* data */
+    DoubleMA4H m_maH4;
+    DoubleMA15M m_mam15;
+
   public:
     S2LMacdBiasStragy(/* args */);
     ~S2LMacdBiasStragy();
 
-  public:
-    void onTick();
-
-    void checkForOpen();
+  private:
+    // bool has_long_chance();
+    // bool has_short_chance();
+    bool has_chance_for_long();
+    bool has_chance_for_short();
+    bool may_long();
+    bool may_short();
 };
 
 S2LMacdBiasStragy::S2LMacdBiasStragy(/* args */)
 {
+    m_stopManager.setTrailingStop(300);
 }
 
 S2LMacdBiasStragy::~S2LMacdBiasStragy()
 {
 }
 
-void S2LMacdBiasStragy::onTick()
+bool S2LMacdBiasStragy::has_chance_for_long()
 {
-    // Print(print_market_state());
-    // Comment(print_market_state());
-    if (m_positionManager.get_curr_orders() == 0)
+    if (m_mam15.is_consolidation())
     {
-        checkForOpen();
-    }
-    else
-    {
-        checkForScale();
-        checkForClose();
+        Print("has_chance_for_long：15分钟震荡行情。");
     }
 
-    m_stopManager.set_stop_less_by_boll();
+    if (m_maH4.is_consolidation())
+    {
+        Print("has_chance_for_long：4H震荡行情。");
+    }
+
+    //     if (longPosition && isMa4HUpForOpen() && isMacd4HLong() && CheckForLong() && has_chance_for_long())
+    return false;
+}
+bool S2LMacdBiasStragy::has_chance_for_short()
+{
+    if (m_mam15.is_consolidation())
+    {
+        Print("has_chance_for_long：15分钟震荡行情。");
+    }
+
+    if (m_maH4.is_consolidation())
+    {
+        Print("has_chance_for_long：4H震荡行情。");
+    }
+    //     if (shortPosition && isMa4HDownForOpen() && isMacd4HShort() && CheckForShort() && has_chance_for_short()) //&& MaCurrent<MaPrevious)
+    return false;
+}
+bool S2LMacdBiasStragy::may_long()
+{
+    return false;
 }
 
-S2LMacdBiasStragy::checkForOpen()
+bool S2LMacdBiasStragy::may_short()
 {
+    return false;
 }
