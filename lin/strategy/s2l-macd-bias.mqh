@@ -985,6 +985,8 @@ bool S2LMacdBiasStragy::has_chance_for_long()
         Print("has_chance_for_long：4H震荡行情。");
     }
 
+    return m_maH4.is_ma_up();
+
     //     if (longPosition && isMa4HUpForOpen() && isMacd4HLong() && CheckForLong() && has_chance_for_long())
     return false;
 }
