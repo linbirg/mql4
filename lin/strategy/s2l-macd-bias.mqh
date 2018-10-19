@@ -296,7 +296,7 @@
 //         Print("CheckForShort:有效时间内没有检测到0轴上的死叉");
 //         if (hasConsolidation(0))
 //         {
-//             Print("CheckForShort:检测到盘整行情，现在已经确定走势，可以开仓。");
+//             Print("CheckForShort:检测到盘整行情，现在已经确定走势，可以开，可以开仓。");
 //             return true;
 //         }
 //         return false;
