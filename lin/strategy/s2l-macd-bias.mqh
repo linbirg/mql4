@@ -944,24 +944,30 @@
 
 #include "abstract_strategy.mqh"
 #include "../indicator/ma.mqh"
+#include "../indicator/macd.mqh"
 
 class S2LMacdBiasStragy : public AbstractStrategy
 {
   private:
     DoubleMA4H m_maH4;
     DoubleMA15M m_mam15;
+    Macd m_macd15;
+    Macd4H m_macd4h;
 
   public:
     S2LMacdBiasStragy(/* args */);
     ~S2LMacdBiasStragy();
 
   private:
-    // bool has_long_chance();
-    // bool has_short_chance();
     bool has_chance_for_long();
     bool has_chance_for_short();
     bool may_long();
     bool may_short();
+
+  private:
+    // 重构s2l-macd
+    bool check_for_long();
+    bool check_for_short();
 };
 
 S2LMacdBiasStragy::S2LMacdBiasStragy(/* args */)
@@ -985,10 +991,7 @@ bool S2LMacdBiasStragy::has_chance_for_long()
         Print("has_chance_for_long：4H震荡行情。");
     }
 
-    return m_maH4.is_ma_up();
-
-    //     if (longPosition && isMa4HUpForOpen() && isMacd4HLong() && CheckForLong() && has_chance_for_long())
-    return false;
+    return m_maH4.is_ma_up() && m_macd4h.is_long() && m_mam15.is_ma_up() && check_for_long() && m_mam15.is_near_by_fast() && m_mam15.is_far_away_fast();
 }
 bool S2LMacdBiasStragy::has_chance_for_short()
 {
@@ -1001,15 +1004,82 @@ bool S2LMacdBiasStragy::has_chance_for_short()
     {
         Print("has_chance_for_long：4H震荡行情。");
     }
-    //     if (shortPosition && isMa4HDownForOpen() && isMacd4HShort() && CheckForShort() && has_chance_for_short()) //&& MaCurrent<MaPrevious)
-    return false;
-}
-bool S2LMacdBiasStragy::may_long()
-{
-    return false;
+    return m_maH4.is_ma_down() && m_macd4h.is_short() && m_mam15.is_ma_down() && check_for_short() && m_mam15.is_near_by_fast() && m_mam15.is_far_away_fast();
 }
 
+/**
+ * 
+ * 持空仓，看是否可能走多。
+*/
+bool S2LMacdBiasStragy::may_long()
+{
+    return m_maH4.is_ma_up();
+}
+
+/**
+ * 
+ * 持多仓，看是否可能走空
+*/
 bool S2LMacdBiasStragy::may_short()
 {
-    return false;
+    return m_maH4.is_ma_down();
+}
+
+bool S2LMacdBiasStragy::check_for_long()
+{
+    if (!m_macd15.is_up())
+        return false;
+
+    //如果是0轴上的第一个金叉，且离0轴不远，均线向上，买
+
+    //如果是0轴下的金叉，（且离0轴很远），均线向上，买
+
+    //如果没有金叉（或者金叉离0轴很远），判断是盘整行情，均线向上，买
+    //     if (isNearByMAAndFarAway() && isMaUp(PERIOD_M5, MAOpenLevel, getNearByMa()))
+    //     {
+    //         Print("has_chance_for_long:true");
+    //         return true;
+    //     }
+
+    int i = m_macd15.find_first_gold();
+
+    if (i > 24)
+    { //24周期内，没有金叉
+        if (m_mam15.is_consolidation())
+        {
+            Print("CheckForLong:检测到盘整行情，现在已经确定走势，可以开仓。");
+            return true;
+        }
+
+        return false;
+    }
+
+    return true;
+}
+
+bool S2LMacdBiasStragy::check_for_short()
+{
+    if (!m_macd15.is_down())
+        return false;
+
+    //如果是0轴上的第一个金叉，且离0轴不远，均线向上，买
+
+    //如果是0轴下的金叉，（且离0轴很远），均线向上，买
+
+    //如果没有金叉（或者金叉离0轴很远），判断是盘整行情，均线向上，买
+
+    int i = m_macd15.find_first_death();
+
+    if (i > 24)
+    { //24周期内，没有死叉
+        if (m_mam15.is_consolidation())
+        {
+            Print("CheckForLong:检测到盘整行情，现在已经确定走势，可以开仓。");
+            return true;
+        }
+
+        return false;
+    }
+
+    return true;
 }
