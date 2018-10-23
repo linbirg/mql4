@@ -990,8 +990,8 @@ bool S2LMacdBiasStragy::has_chance_for_long()
     {
         Print("has_chance_for_long：4H震荡行情。");
     }
-
-    return m_maH4.is_ma_up() && m_macd4h.is_long() && m_mam15.is_ma_up() && check_for_long() && m_mam15.is_near_by_fast() && m_mam15.is_far_away_fast();
+    //m_maH4.is_ma_up() && m_macd4h.is_long() &&
+    return m_mam15.is_ma_up() && check_for_long() && m_mam15.is_near_by_fast() && m_mam15.is_far_away_fast();
 }
 bool S2LMacdBiasStragy::has_chance_for_short()
 {
@@ -1004,7 +1004,8 @@ bool S2LMacdBiasStragy::has_chance_for_short()
     {
         Print("has_chance_for_long：4H震荡行情。");
     }
-    return m_maH4.is_ma_down() && m_macd4h.is_short() && m_mam15.is_ma_down() && check_for_short() && m_mam15.is_near_by_fast() && m_mam15.is_far_away_fast();
+    //m_maH4.is_ma_down() && m_macd4h.is_short() &&
+    return m_mam15.is_ma_down() && check_for_short() && m_mam15.is_near_by_fast() && m_mam15.is_far_away_fast();
 }
 
 /**

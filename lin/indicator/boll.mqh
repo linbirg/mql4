@@ -384,3 +384,40 @@ void Boll1D::init()
 {
     setTimeFrame(1440);
 }
+
+class Boll1W : public Boll
+{
+  private:
+    /* data */
+  public:
+    Boll1W(/* args */);
+    ~Boll1W();
+};
+
+Boll1W::Boll1W(/* args */)
+{
+    setTimeFrame(PERIOD_W1);
+}
+
+Boll1W::~Boll1W()
+{
+}
+
+class Boll1MN : public Boll
+{
+  private:
+    /* data */
+  public:
+    Boll1MN(/* args */);
+    ~Boll1MN();
+};
+
+Boll1MN::Boll1MN(/* args */)
+{
+    setTimeFrame(PERIOD_MN1);
+    setBufferSize(100);
+}
+
+Boll1MN::~Boll1MN()
+{
+}

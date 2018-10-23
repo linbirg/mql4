@@ -16,6 +16,8 @@
 class ThreeBollTrendStrategy
 {
 private:
+  Boll1MN m_boll1mn;
+  Boll1W m_boll1W;
   Boll1D m_bollDay;
   Boll4H m_boll4H;
   Boll1H m_boll1H;
@@ -66,7 +68,7 @@ ThreeBollTrendStrategy::ThreeBollTrendStrategy(/* args */)
   // m_boll15M.setTimeFrame(PERIOD_M15);
   // m_boll15M.setTimeFrame(PERIOD_M5);
 
-  m_stopManager.setTrailingStop(200);
+  m_stopManager.setTrailingStop(240);
 }
 
 ThreeBollTrendStrategy::~ThreeBollTrendStrategy()
@@ -116,6 +118,8 @@ void ThreeBollTrendStrategy::checkForScale()
 
 void ThreeBollTrendStrategy::flush_bolls()
 {
+  m_boll1mn.calc();
+  m_boll1W.calc();
   m_bollDay.calc();
   m_boll4H.calc();
   m_boll1H.calc();
@@ -144,6 +148,13 @@ string ThreeBollTrendStrategy::print_boll_state(Boll &boll, string name)
 string ThreeBollTrendStrategy::print_market_state()
 {
   string state_str = "state:";
+
+  state_str += print_boll_state(m_boll1mn, "1MN");
+
+  state_str += " ";
+  state_str += print_boll_state(m_boll1W, "1W");
+
+  state_str += " ";
   state_str += print_boll_state(m_bollDay, "D1");
 
   state_str += " ";
@@ -218,14 +229,17 @@ void ThreeBollTrendStrategy::calcStopLoss()
 */
 bool ThreeBollTrendStrategy::has_chance_for_long()
 {
-  //m_bollDay.is_long() &&m_boll4H.is_long() &&
-  return m_boll1H.is_long() && m_boll15M.is_long();
+  // return m_boll1H.is_long() && (m_boll15M.is_long() || m_boll5M.is_long());
+  return (m_boll1mn.is_long() || m_boll1W.is_long() || m_bollDay.is_long() || m_boll4H.is_long()) &&
+         m_boll1H.is_long() && (m_boll15M.is_long() || m_boll5M.is_long());
 }
 
 bool ThreeBollTrendStrategy::has_chance_for_short()
 {
   //m_bollDay.is_short() &&m_boll4H.is_short() &&
-  return m_boll1H.is_short() && m_boll15M.is_short();
+  // return m_boll1H.is_short() && (m_boll15M.is_short() || m_boll5M.is_short());
+  return (m_boll1mn.is_short() || m_boll1W.is_short() || m_bollDay.is_short() || m_boll4H.is_short()) &&
+         m_boll1H.is_short() && (m_boll15M.is_short() || m_boll5M.is_short());
 }
 
 void ThreeBollTrendStrategy::open_long()
@@ -254,14 +268,19 @@ bool ThreeBollTrendStrategy::has_short_position()
 */
 bool ThreeBollTrendStrategy::may_long()
 {
-  if (m_bollDay.is_short())
+  // 存在大趋势
+  if (m_boll1mn.is_short() || m_boll1W.is_short())
+  {
+    return m_bollDay.is_long();
+  }
+
+  // 没有大趋势，看中趋势日线,如果日线没有走long，则只要4H线不走long
+  if (!m_bollDay.is_long())
   {
     return m_boll4H.is_long();
   }
-  else
-  {
-    return !m_boll1H.is_short();
-  }
+
+  return !m_boll1H.is_short();
 }
 
 /**
@@ -271,17 +290,29 @@ bool ThreeBollTrendStrategy::may_long()
 */
 bool ThreeBollTrendStrategy::may_short()
 {
+  // 存在大趋势
+  if (m_boll1mn.is_long() || m_boll1W.is_long())
+  {
+    return m_bollDay.is_short();
+  }
 
-  if (m_bollDay.is_long())
+  // 没有大趋势，看中趋势日线,如果日线没有走long，则只要4H线不走long
+  if (!m_bollDay.is_short())
   {
     return m_boll4H.is_short();
   }
-  else
-  {
-    return !m_boll1H.is_long();
-  }
 
-  // return m_boll4H.is_short();
+  return !m_boll1H.is_long();
+  // if (!m_bollDay.is_short())
+  // {
+  //   return m_boll4H.is_short();
+  // }
+  // else
+  // {
+  //   return !m_boll1H.is_long();
+  // }
+
+  // // return m_boll4H.is_short();
 }
 
 void ThreeBollTrendStrategy::close_long()
