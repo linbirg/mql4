@@ -26,6 +26,8 @@ class AbstractStrategy
     virtual void checkForScale(); // 加仓
     virtual void calcStopLoss();  // 止损
 
+    virtual void do_every_tick(){};
+
   protected:
     virtual void open_long();
     virtual void open_short();
@@ -52,6 +54,7 @@ AbstractStrategy::~AbstractStrategy()
 
 void AbstractStrategy::onTick()
 {
+    do_every_tick();
     if (m_positionManager.get_curr_orders() == 0)
     {
         checkForOpen();

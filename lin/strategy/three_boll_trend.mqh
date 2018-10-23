@@ -8,6 +8,7 @@
 #property version "1.00"
 #property strict
 
+#include "../util/util.mqh"
 #include "../indicator/boll.mqh"
 // #include "../orders/order_helper.mqh"
 #include "../position/position_manager.mqh"
@@ -26,6 +27,7 @@ private:
 
   PositionManager m_positionManager;
   StopManager m_stopManager;
+  Util m_util;
 
 public:
   ThreeBollTrendStrategy(/* args */);
@@ -220,7 +222,14 @@ void ThreeBollTrendStrategy::checkForClose()
 */
 void ThreeBollTrendStrategy::calcStopLoss()
 {
-  m_stopManager.set_stop_less_by_boll();
+
+  if (m_util.double_equal(OrderStopLoss(), 0))
+  {
+    m_stopManager.set_defual_stop();
+  }
+
+  if (m_boll1mn.is_flat() && m_boll1W.is_flat() && m_bollDay.is_flat())
+    m_stopManager.set_stop_less_by_boll();
 }
 
 /**
