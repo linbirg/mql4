@@ -228,8 +228,8 @@ void ThreeBollTrendStrategy::calcStopLoss()
     m_stopManager.set_defual_stop();
   }
 
-  if (m_boll1mn.is_flat() && m_boll1W.is_flat() && m_bollDay.is_flat())
-    m_stopManager.set_stop_less_by_boll();
+  // if (m_boll1mn.is_flat() && m_boll1W.is_flat() && m_bollDay.is_flat())
+  //   m_stopManager.set_stop_less_by_boll();
 }
 
 /**
