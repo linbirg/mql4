@@ -640,6 +640,7 @@ bool IndicatorArrayGroup::is_multi_up(int cnt = 3)
     // 所有速度都必须在mid区域，不能太小或者太大。(暂时只考虑不能太小)
     for (int i = 0; i < cnt; i++)
     {
+        // Print("m_speed[i]:"+m_speed[i]);
         if (m_metrx.is_low_area(m_speed[i]))
         {
             return false;

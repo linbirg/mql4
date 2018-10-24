@@ -182,6 +182,12 @@ void ThreeBollTrendStrategy::checkForOpen()
 {
   Print("checkForOpen");
 
+  if (!m_positionManager.is_hisorder_pass_break())
+  {
+    Print("checkForOpen：上笔才过去，一段时间内不再开仓。");
+    return;
+  }
+
   if (!m_positionManager.is_last_lost_and_passed())
   {
     Print("checkForOpen：上笔订单亏损，一段时间内不再开仓交易。");
@@ -222,14 +228,11 @@ void ThreeBollTrendStrategy::checkForClose()
 */
 void ThreeBollTrendStrategy::calcStopLoss()
 {
-
-  if (m_util.double_equal(OrderStopLoss(), 0))
-  {
-    m_stopManager.set_defual_stop();
-  }
+  // m_stopManager.set_defual_stop();
 
   // if (m_boll1mn.is_flat() && m_boll1W.is_flat() && m_bollDay.is_flat())
   //   m_stopManager.set_stop_less_by_boll();
+  m_stopManager.set_stop_less_by_step();
 }
 
 /**

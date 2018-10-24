@@ -28,7 +28,7 @@ class Boll : public IIndicator
         reset_buf();
         //init_config();
 
-        m_start_time = iTime(NULL, m_frame, m_buffer_size);
+        // m_start_time = iTime(NULL, m_frame, m_buffer_size);
     };
 
   public:
@@ -76,6 +76,8 @@ class Boll : public IIndicator
     // void calc_upper();
     void calc_band();
     void reset_buf();
+    void init_start_time();
+
     void nec_calc_band();
 
   private:
@@ -114,15 +116,25 @@ class Boll : public IIndicator
     int m_buffer_size;
 };
 
+/**
+ * 在m_frame和m_buffer_size改变时，需要重新初始化
+*/
+void Boll::init_start_time()
+{
+    m_start_time = iTime(NULL, m_frame, m_buffer_size);
+}
+
 void Boll::setTimeFrame(int frame)
 {
     m_frame = frame;
+    init_start_time();
 }
 
 void Boll::setBufferSize(int size)
 {
     m_buffer_size = size;
     reset_buf();
+    init_start_time();
 }
 
 void Boll::reset_buf()
@@ -156,7 +168,7 @@ void Boll::nec_calc_band()
     datetime now = iTime(NULL, m_frame, 0);
     int count = (now - m_start_time) / (60 * m_frame);
 
-    for (int i = 0; i < count; i++)
+    for (int i = count - 1; i >= 0; i--)
     {
         m_mainIndicator.append(iBands(NULL, m_frame, m_period, m_num_std, 0, PRICE_CLOSE, MODE_MAIN, i));
         m_upperIndicator.append(iBands(NULL, m_frame, m_period, m_num_std, 0, PRICE_CLOSE, MODE_UPPER, i));
