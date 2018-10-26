@@ -123,7 +123,9 @@ ThreeBollTrendStrategy::~ThreeBollTrendStrategy()
 void ThreeBollTrendStrategy::do_every_tick()
 {
   flush_bolls();
-  print_market_state();
+  string st_str = print_market_state();
+  Print(st_str);
+  Comment(st_str);
 }
 
 void ThreeBollTrendStrategy::flush_bolls()

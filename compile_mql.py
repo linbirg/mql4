@@ -32,7 +32,7 @@ class Mql4compileCommand():
         cmd = '\"%s\" /compile:\"%s\" /log:\"%s\"' % (self.compilerpath,
                                                       self.mql4filepath,
                                                       self.mql4logpath)
-        return subprocess.call(cmd)
+        return subprocess.call(cmd, shell=True)
 
     # def openlog(self):
     #     window = self.view.window()
