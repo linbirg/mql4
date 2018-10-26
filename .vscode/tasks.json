@@ -18,7 +18,8 @@
         {
             "label": "Compile-MQL",
             "type": "shell",
-            "command": "&'D:\\Program Files (x86)\\FXCM MetaTrader 4\\metaeditor.exe /compile:${file} /log:D:\\Program Files (x86)\\FXCM MetaTrader 4\\compile.log'",
+            // "command": "&'D:\\Program Files (x86)\\FXCM MetaTrader 4\\metaeditor.exe' /compile:${file} /log:D:\\Program Files (x86)\\FXCM MetaTrader 4\\compile.log",
+            "command": "python compile_mql.py",
             "presentation": {
                 "echo": true,
                 "reveal": "always",

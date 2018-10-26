@@ -13,8 +13,9 @@
 // #include "../orders/order_helper.mqh"
 #include "../position/position_manager.mqh"
 #include "../position/stop_manager.mqh"
+#include "abstract_strategy.mqh"
 
-class ThreeBollTrendStrategy
+class ThreeBollTrendStrategy : public AbstractStrategy
 {
 private:
   Boll1MN m_boll1mn;
@@ -25,36 +26,44 @@ private:
   Boll15M m_boll15M;
   Boll5M m_boll5M;
 
-  PositionManager m_positionManager;
-  StopManager m_stopManager;
-  Util m_util;
+  // PositionManager m_positionManager;
+  // StopManager m_stopManager;
+  // Util m_util;
 
 public:
   ThreeBollTrendStrategy(/* args */);
   ~ThreeBollTrendStrategy();
 
-public:
-  void onTick();
-
-public:
-  void checkForOpen();  //开仓
-  void checkForClose(); //平仓
-  void checkForScale(); //加仓
-
-public:
-  void calcStopLoss(); //止损策略
 private:
   bool has_chance_for_long();
-  void open_long();
   bool has_chance_for_short();
-  void open_short();
-  bool has_long_position();
-  bool has_short_position();
   bool may_long();
   bool may_short();
 
-  void close_long();
-  void close_short();
+  void do_every_tick();
+
+  // public:
+  //   void onTick();
+
+  // public:
+  //   void checkForOpen();  //开仓
+  //   void checkForClose(); //平仓
+  //   void checkForScale(); //加仓
+
+public:
+  void calcStopLoss(); //止损策略
+  // private:
+  //   bool has_chance_for_long();
+  //   void open_long();
+  //   bool has_chance_for_short();
+  //   void open_short();
+  //   bool has_long_position();
+  //   bool has_short_position();
+  //   bool may_long();
+  //   bool may_short();
+
+  //   void close_long();
+  //   void close_short();
 
 private:
   void flush_bolls();
@@ -64,58 +73,57 @@ private:
 
 ThreeBollTrendStrategy::ThreeBollTrendStrategy(/* args */)
 {
-  // m_bollDay.setTimeFrame(PERIOD_D1);
-  // m_boll4H.setTimeFrame(PERIOD_H4);
-  // m_boll1H.setTimeFrame(PERIOD_H1);
-  // m_boll15M.setTimeFrame(PERIOD_M15);
-  // m_boll15M.setTimeFrame(PERIOD_M5);
-
-  m_stopManager.setTrailingStop(240);
+  m_stopManager.setTrailingStop(300);
 }
 
 ThreeBollTrendStrategy::~ThreeBollTrendStrategy()
 {
 }
 
-ThreeBollTrendStrategy::onTick()
+// ThreeBollTrendStrategy::onTick()
+// {
+//   flush_bolls();
+//   Print(print_market_state());
+//   Comment(print_market_state());
+//   if (m_positionManager.get_curr_orders() == 0)
+//   {
+//     checkForOpen();
+//   }
+//   else
+//   {
+//     checkForScale();
+//     checkForClose();
+//   }
+
+//   calcStopLoss();
+// }
+
+// void ThreeBollTrendStrategy::checkForScale()
+// {
+//   if (m_positionManager.get_curr_orders() == 0)
+//   {
+//     return;
+//   }
+
+//   if (m_positionManager.is_current_opened())
+//   {
+//     Print("CheckForScaleIn:当前周期已经开过仓位");
+//     return;
+//   }
+
+//   if (!m_stopManager.is_stop_cover_trailing_profit())
+//   {
+//     Print("checkForScale:止损位没有覆盖开仓后的移动止损价格.");
+//     return;
+//   }
+
+//   checkForOpen();
+// }
+
+void ThreeBollTrendStrategy::do_every_tick()
 {
   flush_bolls();
-  Print(print_market_state());
-  Comment(print_market_state());
-  if (m_positionManager.get_curr_orders() == 0)
-  {
-    checkForOpen();
-  }
-  else
-  {
-    checkForScale();
-    checkForClose();
-  }
-
-  calcStopLoss();
-}
-
-void ThreeBollTrendStrategy::checkForScale()
-{
-
-  if (m_positionManager.get_curr_orders() == 0)
-  {
-    return;
-  }
-
-  if (m_positionManager.is_current_opened())
-  {
-    Print("CheckForScaleIn:当前周期已经开过仓位");
-    return;
-  }
-
-  if (!m_stopManager.is_stop_cover_trailing_profit())
-  {
-    Print("checkForScale:止损位没有覆盖开仓后的移动止损价格.");
-    return;
-  }
-
-  checkForOpen();
+  print_market_state();
 }
 
 void ThreeBollTrendStrategy::flush_bolls()
@@ -178,49 +186,49 @@ string ThreeBollTrendStrategy::print_market_state()
  * 
  * 加仓原理：日线boll看多，4H看多，1H看多，根据5M线择机开多仓。（空仓同理）
 */
-void ThreeBollTrendStrategy::checkForOpen()
-{
-  Print("checkForOpen");
+// void ThreeBollTrendStrategy::checkForOpen()
+// {
+//   Print("checkForOpen");
 
-  if (!m_positionManager.is_hisorder_pass_break())
-  {
-    Print("checkForOpen：上笔才过去，一段时间内不再开仓。");
-    return;
-  }
+//   if (!m_positionManager.is_hisorder_pass_break())
+//   {
+//     Print("checkForOpen：上笔才过去，一段时间内不再开仓。");
+//     return;
+//   }
 
-  if (!m_positionManager.is_last_lost_and_passed())
-  {
-    Print("checkForOpen：上笔订单亏损，一段时间内不再开仓交易。");
-    return;
-  }
+//   if (!m_positionManager.is_last_lost_and_passed())
+//   {
+//     Print("checkForOpen：上笔订单亏损，一段时间内不再开仓交易。");
+//     return;
+//   }
 
-  if (has_chance_for_long())
-  {
-    open_long();
-  }
+//   if (has_chance_for_long())
+//   {
+//     open_long();
+//   }
 
-  if (has_chance_for_short())
-  {
-    open_short();
-  }
-}
+//   if (has_chance_for_short())
+//   {
+//     open_short();
+//   }
+// }
 
 /**
  * 
  * 平仓原理：4H走平，不平，4H走反，平仓。
 */
-void ThreeBollTrendStrategy::checkForClose()
-{
-  if (has_long_position() && may_short())
-  {
-    close_long();
-  }
+// void ThreeBollTrendStrategy::checkForClose()
+// {
+//   if (has_long_position() && may_short())
+//   {
+//     close_long();
+//   }
 
-  if (has_short_position() && may_long())
-  {
-    close_short();
-  }
-}
+//   if (has_short_position() && may_long())
+//   {
+//     close_short();
+//   }
+// }
 
 /**
  * 
@@ -254,25 +262,25 @@ bool ThreeBollTrendStrategy::has_chance_for_short()
          m_boll1H.is_short() && (m_boll15M.is_short() || m_boll5M.is_short());
 }
 
-void ThreeBollTrendStrategy::open_long()
-{
-  m_positionManager.open_long();
-}
+// void ThreeBollTrendStrategy::open_long()
+// {
+//   m_positionManager.open_long();
+// }
 
-void ThreeBollTrendStrategy::open_short()
-{
-  m_positionManager.open_short();
-}
+// void ThreeBollTrendStrategy::open_short()
+// {
+//   m_positionManager.open_short();
+// }
 
-bool ThreeBollTrendStrategy::has_long_position()
-{
-  return m_positionManager.get_curr_long_positions() > 0;
-}
+// bool ThreeBollTrendStrategy::has_long_position()
+// {
+//   return m_positionManager.get_curr_long_positions() > 0;
+// }
 
-bool ThreeBollTrendStrategy::has_short_position()
-{
-  return m_positionManager.get_curr_short_positions() > 0;
-}
+// bool ThreeBollTrendStrategy::has_short_position()
+// {
+//   return m_positionManager.get_curr_short_positions() > 0;
+// }
 
 /*
 * 用于判断空头反转。
@@ -327,12 +335,12 @@ bool ThreeBollTrendStrategy::may_short()
   // // return m_boll4H.is_short();
 }
 
-void ThreeBollTrendStrategy::close_long()
-{
-  m_positionManager.close_all_long_positions();
-}
+// void ThreeBollTrendStrategy::close_long()
+// {
+//   m_positionManager.close_all_long_positions();
+// }
 
-void ThreeBollTrendStrategy::close_short()
-{
-  m_positionManager.close_all_short_positions();
-}
+// void ThreeBollTrendStrategy::close_short()
+// {
+//   m_positionManager.close_all_short_positions();
+// }

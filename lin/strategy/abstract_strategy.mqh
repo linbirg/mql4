@@ -79,6 +79,27 @@ void AbstractStrategy::checkForOpen()
         return;
     }
 
+    // if (!m_positionManager.is_hisorder_pass_break())
+    // {
+    //     Print("checkForOpen：上笔才过去，一段时间内不再开仓。");
+    //     return;
+    // }
+
+    // if (!m_positionManager.is_last_lost_and_passed())
+    // {
+    //     Print("checkForOpen：上笔订单亏损，一段时间内不再开仓交易。");
+    //     return;
+    // }
+
+    // if (has_chance_for_long())
+    // {
+    //     open_long();
+    // }
+
+    // if (has_chance_for_short())
+    // {
+    //     open_short();
+    // }
     if (!m_positionManager.is_hisorder_pass_break())
     {
         Print("checkForOpen：上笔才过去，一段时间内不再开仓。");
