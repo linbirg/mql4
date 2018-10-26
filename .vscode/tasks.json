@@ -18,7 +18,7 @@
         {
             "label": "Compile-MQL",
             "type": "shell",
-            "command": "C:\\Users\\Acme\\AppData\\Roaming\\MetaQuotes\\Terminal\\83D4764E0403A8685E84D6FCAB361879\\MQL5\\Compile-MQL.ps1 ${file}",
+            "command": "&'D:\\Program Files (x86)\\FXCM MetaTrader 4\\metaeditor.exe /compile:${file} /log:D:\\Program Files (x86)\\FXCM MetaTrader 4\\compile.log'",
             "presentation": {
                 "echo": true,
                 "reveal": "always",
