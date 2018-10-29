@@ -15,6 +15,8 @@
 #include "../position/stop_manager.mqh"
 #include "abstract_strategy.mqh"
 
+input double TrailingStop = 280; // 移动止损
+
 class ThreeBollTrendStrategy : public AbstractStrategy
 {
 private:
@@ -73,7 +75,7 @@ private:
 
 ThreeBollTrendStrategy::ThreeBollTrendStrategy(/* args */)
 {
-  m_stopManager.setTrailingStop(300);
+  m_stopManager.setTrailingStop(TrailingStop);
 }
 
 ThreeBollTrendStrategy::~ThreeBollTrendStrategy()
