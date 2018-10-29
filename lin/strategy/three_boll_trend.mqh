@@ -50,7 +50,7 @@ private:
   // public:
   //   void checkForOpen();  //开仓
   //   void checkForClose(); //平仓
-  //   void checkForScale(); //加仓
+  void checkForScale(); //加仓
 
 public:
   void calcStopLoss(); //止损策略
@@ -100,27 +100,17 @@ ThreeBollTrendStrategy::~ThreeBollTrendStrategy()
 //   calcStopLoss();
 // }
 
-// void ThreeBollTrendStrategy::checkForScale()
-// {
-//   if (m_positionManager.get_curr_orders() == 0)
-//   {
-//     return;
-//   }
+void ThreeBollTrendStrategy::checkForScale()
+{
 
-//   if (m_positionManager.is_current_opened())
-//   {
-//     Print("CheckForScaleIn:当前周期已经开过仓位");
-//     return;
-//   }
+  if (m_bollDay.is_flat())
+  {
+    Print("checkForScale:日线没有趋势，不加仓。");
+    return;
+  }
 
-//   if (!m_stopManager.is_stop_cover_trailing_profit())
-//   {
-//     Print("checkForScale:止损位没有覆盖开仓后的移动止损价格.");
-//     return;
-//   }
-
-//   checkForOpen();
-// }
+  AbstractStrategy::checkForScale();
+}
 
 void ThreeBollTrendStrategy::do_every_tick()
 {
@@ -265,26 +255,6 @@ bool ThreeBollTrendStrategy::has_chance_for_short()
   return (m_boll4H.is_short() || m_bollDay.is_short() || m_boll1W.is_short() || m_boll1mn.is_short()) &&
          m_boll1H.is_short() && (m_boll15M.is_short() || m_boll5M.is_short());
 }
-
-// void ThreeBollTrendStrategy::open_long()
-// {
-//   m_positionManager.open_long();
-// }
-
-// void ThreeBollTrendStrategy::open_short()
-// {
-//   m_positionManager.open_short();
-// }
-
-// bool ThreeBollTrendStrategy::has_long_position()
-// {
-//   return m_positionManager.get_curr_long_positions() > 0;
-// }
-
-// bool ThreeBollTrendStrategy::has_short_position()
-// {
-//   return m_positionManager.get_curr_short_positions() > 0;
-// }
 
 /*
 * 用于判断空头反转。
