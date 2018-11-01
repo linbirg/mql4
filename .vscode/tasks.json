@@ -6,7 +6,8 @@
         {
             "label": "Compile-Project-X",
             "type": "shell",
-            "command": "C:\\Users\\Acme\\AppData\\Roaming\\MetaQuotes\\Terminal\\83D4764E0403A8685E84D6FCAB361879\\MQL5\\Compile-MQL.ps1  C:\\Users\\Acme\\AppData\\Roaming\\MetaQuotes\\Terminal\\83D4764E0403A8685E84D6FCAB361879\\MQL5\\Experts\\ProjectX\\ProjectX.mq5",
+            // "command": "C:\\Users\\Acme\\AppData\\Roaming\\MetaQuotes\\Terminal\\83D4764E0403A8685E84D6FCAB361879\\MQL5\\Compile-MQL.ps1  C:\\Users\\Acme\\AppData\\Roaming\\MetaQuotes\\Terminal\\83D4764E0403A8685E84D6FCAB361879\\MQL5\\Experts\\ProjectX\\ProjectX.mq5",
+            "command": "cp -force C:\\Users\\linbirg\\AppData\\Roaming\\MetaQuotes\\Terminal\\0C5A5234D43718FB9DCC99706F691BA2\\MQL4\\Experts\\lin_ea\\* C:\\Users\\linbirg\\AppData\\Roaming\\MetaQuotes\\Terminal\\D152CC2B874820776CF12C7C7FCA7C56\\MQL4\\Experts\\lin_ea",
             "presentation": {
                 "echo": true,
                 "reveal": "always",

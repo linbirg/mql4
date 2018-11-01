@@ -40,7 +40,9 @@ private:
   bool has_chance_for_long();
   bool has_chance_for_short();
   bool may_long();
+  bool may_long_by_day();
   bool may_short();
+  bool may_short_by_day();
 
   void do_every_tick();
 
@@ -81,24 +83,6 @@ ThreeBollTrendStrategy::ThreeBollTrendStrategy(/* args */)
 ThreeBollTrendStrategy::~ThreeBollTrendStrategy()
 {
 }
-
-// ThreeBollTrendStrategy::onTick()
-// {
-//   flush_bolls();
-//   Print(print_market_state());
-//   Comment(print_market_state());
-//   if (m_positionManager.get_curr_orders() == 0)
-//   {
-//     checkForOpen();
-//   }
-//   else
-//   {
-//     checkForScale();
-//     checkForClose();
-//   }
-
-//   calcStopLoss();
-// }
 
 void ThreeBollTrendStrategy::checkForScale()
 {
@@ -178,54 +162,6 @@ string ThreeBollTrendStrategy::print_market_state()
 
 /**
  * 
- * 加仓原理：日线boll看多，4H看多，1H看多，根据5M线择机开多仓。（空仓同理）
-*/
-// void ThreeBollTrendStrategy::checkForOpen()
-// {
-//   Print("checkForOpen");
-
-//   if (!m_positionManager.is_hisorder_pass_break())
-//   {
-//     Print("checkForOpen：上笔才过去，一段时间内不再开仓。");
-//     return;
-//   }
-
-//   if (!m_positionManager.is_last_lost_and_passed())
-//   {
-//     Print("checkForOpen：上笔订单亏损，一段时间内不再开仓交易。");
-//     return;
-//   }
-
-//   if (has_chance_for_long())
-//   {
-//     open_long();
-//   }
-
-//   if (has_chance_for_short())
-//   {
-//     open_short();
-//   }
-// }
-
-/**
- * 
- * 平仓原理：4H走平，不平，4H走反，平仓。
-*/
-// void ThreeBollTrendStrategy::checkForClose()
-// {
-//   if (has_long_position() && may_short())
-//   {
-//     close_long();
-//   }
-
-//   if (has_short_position() && may_long())
-//   {
-//     close_short();
-//   }
-// }
-
-/**
- * 
  * 止损策略：以5M的上中线轨为基础，随时间推移逐步扩展到15M，1H，4H的上中下轨。
 */
 void ThreeBollTrendStrategy::calcStopLoss()
@@ -256,11 +192,21 @@ bool ThreeBollTrendStrategy::has_chance_for_short()
          m_boll1H.is_short() && (m_boll15M.is_short() || m_boll5M.is_short());
 }
 
+bool ThreeBollTrendStrategy::may_long()
+{
+  if (m_boll1W.is_short())
+  {
+    return false;
+  }
+
+  return may_long_by_day();
+}
+
 /*
 * 用于判断空头反转。
 * 如果日线不空，则只要1H不空为may long，如果日线为空，则以4H走多为反转。
 */
-bool ThreeBollTrendStrategy::may_long()
+bool ThreeBollTrendStrategy::may_long_by_day()
 {
   // 存在大趋势
   if (m_boll1W.is_short() || m_boll1mn.is_short())
@@ -277,12 +223,22 @@ bool ThreeBollTrendStrategy::may_long()
   return !m_boll1H.is_short();
 }
 
+bool ThreeBollTrendStrategy::may_short()
+{
+  if (m_boll1W.is_long())
+  {
+    return false;
+  }
+
+  return may_short_by_day();
+}
+
 /**
  * 用于判断多头的反转。
  * 如果日线多头，则以4H的反转为反转；如果日线不多，则以1H的不多为反转。
  * 
 */
-bool ThreeBollTrendStrategy::may_short()
+bool ThreeBollTrendStrategy::may_short_by_day()
 {
   // 存在大趋势
   if (m_boll1W.is_long() || m_boll1mn.is_long())
@@ -297,24 +253,4 @@ bool ThreeBollTrendStrategy::may_short()
   }
 
   return !m_boll1H.is_long();
-  // if (!m_bollDay.is_short())
-  // {
-  //   return m_boll4H.is_short();
-  // }
-  // else
-  // {
-  //   return !m_boll1H.is_long();
-  // }
-
-  // // return m_boll4H.is_short();
 }
-
-// void ThreeBollTrendStrategy::close_long()
-// {
-//   m_positionManager.close_all_long_positions();
-// }
-
-// void ThreeBollTrendStrategy::close_short()
-// {
-//   m_positionManager.close_all_short_positions();
-// }
