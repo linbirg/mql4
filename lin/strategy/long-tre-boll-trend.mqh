@@ -186,8 +186,8 @@ bool LongThrBollTrendStrategy::has_chance_for_long()
     // return m_boll1H.is_long() && (m_boll15M.is_long() || m_boll5M.is_long());
     // return (m_bollDay.is_long() || m_boll1W.is_long() || m_boll1mn.is_long()) && // 顺序由4H到1MN m_boll4H.is_long() ||
     //        m_boll4H.is_long() && (m_boll1H.is_long() || m_boll15M.is_long() || m_boll5M.is_long());
-    return (m_boll4H.is_long() || m_bollDay.is_long() || m_boll1W.is_long()) && // 顺序由4H到1MN
-           (m_boll1H.is_long() || m_boll1mn.is_long()) && (m_boll15M.is_long() || m_boll5M.is_long());
+    return (m_boll1mn.is_long() || m_bollDay.is_long() || m_boll1W.is_long()) && // 顺序由4H到1MN
+           (m_boll1H.is_long() || m_boll4H.is_long()) && (m_boll15M.is_long() || m_boll5M.is_long());
 }
 
 bool LongThrBollTrendStrategy::has_chance_for_short()
