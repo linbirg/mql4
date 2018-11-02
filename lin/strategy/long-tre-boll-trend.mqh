@@ -212,13 +212,19 @@ bool LongThrBollTrendStrategy::may_long()
     // 1. 如果月线为空，如果周线也空，则继续持有。
     // 2. 如果月线为空，周线震荡，则往日线级别看。
 
-    if (m_boll1W.is_short())
+    if ((m_boll1mn.is_short() || m_boll1mn.is_flat()) && m_boll1W.is_short())
     {
-        Print("周线看空,继续持有空头仓位。"); //或者周线看空，继续持有？
+        Print("月线震荡或看空，周线看空,继续持有空头仓位。"); //或者周线看空，继续持有？
         return false;
     }
 
-    Print("月线和周线都不空，以日线为主。");
+    // if (m_boll1W.is_short())
+    // {
+    //     Print("周线看空,继续持有空头仓位。"); //或者周线看空，继续持有？
+    //     return false;
+    // }
+
+    Print("月线或周线都不空，以日线为主。");
     return may_long_by_day();
 }
 
@@ -290,23 +296,18 @@ bool LongThrBollTrendStrategy::may_short_by_day()
 */
 bool LongThrBollTrendStrategy::may_short()
 {
-    // if (m_boll1mn.is_long())
-    // {
-    //     if (m_boll1W.is_long())
-    //     {
-    //         Print("月线和周线都多，继续持有。");
-    //         return false;
-    //     }
-
-    //     Print("月线为多，周线震荡（或者为空），看日线。");
-    // }
-
-    // Print("月线震荡或看空。");
-    if (m_boll1W.is_long())
+    if ((m_boll1mn.is_long() || m_boll1mn.is_flat()) && m_boll1W.is_long())
     {
-        Print("周线看多，继续持有仓位。"); //或者周线看多，继续持有？
+        Print("月线震荡或看多，周线看多,继续持有多头仓位。"); //或者周线看空，继续持有？
         return false;
     }
+
+    // // Print("月线震荡或看空。");
+    // if (m_boll1W.is_long())
+    // {
+    //     Print("周线看多，继续持有仓位。"); //或者周线看多，继续持有？
+    //     return false;
+    // }
 
     Print("月线和周线都不多，以日线为主。");
     return may_short_by_day();
