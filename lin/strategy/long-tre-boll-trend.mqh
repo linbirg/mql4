@@ -171,13 +171,9 @@ void LongThrBollTrendStrategy::calcStopLoss()
 {
     // 如果月线或者周线都为震荡，以移动止损为主。
     // 如果月线周线趋势相同，以步进止损为主。
-    // if (!m_boll1W.is_flat())
-    // {
-    //     m_stopManager.set_stop_less_by_step();
-    //     return;
-    // }
+    if (m_boll1W.is_flat()) //&& m_boll1mn.is_flat() ||m_bollDay.is_flat()
+        m_stopManager.set_stop_less_by_boll();
 
-    // m_stopManager.set_stop_less_by_boll();
     m_stopManager.set_stop_less_by_step();
 }
 
@@ -188,8 +184,10 @@ void LongThrBollTrendStrategy::calcStopLoss()
 bool LongThrBollTrendStrategy::has_chance_for_long()
 {
     // return m_boll1H.is_long() && (m_boll15M.is_long() || m_boll5M.is_long());
-    return (m_bollDay.is_long() || m_boll1W.is_long() || m_boll1mn.is_long()) && // 顺序由4H到1MN m_boll4H.is_long() ||
-           m_boll4H.is_long() && (m_boll1H.is_long() || m_boll15M.is_long() || m_boll5M.is_long());
+    // return (m_bollDay.is_long() || m_boll1W.is_long() || m_boll1mn.is_long()) && // 顺序由4H到1MN m_boll4H.is_long() ||
+    //        m_boll4H.is_long() && (m_boll1H.is_long() || m_boll15M.is_long() || m_boll5M.is_long());
+    return (m_boll4H.is_long() || m_bollDay.is_long() || m_boll1W.is_long()) && // 顺序由4H到1MN
+           (m_boll1H.is_long() || m_boll1mn.is_long()) && (m_boll15M.is_long() || m_boll5M.is_long());
 }
 
 bool LongThrBollTrendStrategy::has_chance_for_short()
@@ -199,8 +197,10 @@ bool LongThrBollTrendStrategy::has_chance_for_short()
     // return (m_boll4H.is_short() || m_bollDay.is_short() || m_boll1W.is_short() || m_boll1mn.is_short()) &&
     //        m_boll1H.is_short() && (m_boll15M.is_short() || m_boll5M.is_short());
 
-    return (m_bollDay.is_short() || m_boll1W.is_short() || m_boll1mn.is_short()) && //
-           m_boll4H.is_short() && (m_boll1H.is_short() || m_boll15M.is_short() || m_boll5M.is_short());
+    // return (m_bollDay.is_short() || m_boll1W.is_short() || m_boll1mn.is_short()) && //
+    //        m_boll4H.is_short() && (m_boll1H.is_short() || m_boll15M.is_short() || m_boll5M.is_short());
+    return (m_bollDay.is_short() || m_boll1W.is_short() || m_boll1mn.is_short()) &&
+           (m_boll4H.is_short() || m_boll1H.is_short()) && (m_boll15M.is_short() || m_boll5M.is_short());
 }
 
 /*

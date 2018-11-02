@@ -168,8 +168,9 @@ void ThreeBollTrendStrategy::calcStopLoss()
 {
   // m_stopManager.set_defual_stop();
 
-  // if (m_boll1mn.is_flat() && m_boll1W.is_flat() && m_bollDay.is_flat())
-  //   m_stopManager.set_stop_less_by_boll();
+  if (m_boll1W.is_flat()) //&& m_boll1mn.is_flat() ||m_bollDay.is_flat()
+    m_stopManager.set_stop_less_by_boll();
+
   m_stopManager.set_stop_less_by_step();
 }
 
@@ -180,16 +181,16 @@ void ThreeBollTrendStrategy::calcStopLoss()
 bool ThreeBollTrendStrategy::has_chance_for_long()
 {
   // return m_boll1H.is_long() && (m_boll15M.is_long() || m_boll5M.is_long());
-  return (m_boll4H.is_long() || m_bollDay.is_long() || m_boll1W.is_long() || m_boll1mn.is_long()) && // 顺序由4H到1MN
-         m_boll1H.is_long() && (m_boll15M.is_long() || m_boll5M.is_long());
+  return (m_boll4H.is_long() || m_bollDay.is_long() || m_boll1W.is_long()) && // 顺序由4H到1MN
+         (m_boll1H.is_long() || m_boll1mn.is_long()) && (m_boll15M.is_long() || m_boll5M.is_long());
 }
 
 bool ThreeBollTrendStrategy::has_chance_for_short()
 {
   //m_bollDay.is_short() &&m_boll4H.is_short() &&
   // return m_boll1H.is_short() && (m_boll15M.is_short() || m_boll5M.is_short());
-  return (m_boll4H.is_short() || m_bollDay.is_short() || m_boll1W.is_short() || m_boll1mn.is_short()) &&
-         m_boll1H.is_short() && (m_boll15M.is_short() || m_boll5M.is_short());
+  return (m_bollDay.is_short() || m_boll1W.is_short() || m_boll1mn.is_short()) &&
+         (m_boll4H.is_short() || m_boll1H.is_short()) && (m_boll15M.is_short() || m_boll5M.is_short());
 }
 
 bool ThreeBollTrendStrategy::may_long()
