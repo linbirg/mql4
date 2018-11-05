@@ -172,7 +172,10 @@ void LongThrBollTrendStrategy::calcStopLoss()
     // 如果月线或者周线都为震荡，以移动止损为主。
     // 如果月线周线趋势相同，以步进止损为主。
     if (m_boll1W.is_flat()) //&& m_boll1mn.is_flat() ||m_bollDay.is_flat()
+    {
         m_stopManager.set_stop_less_by_boll();
+        return;
+    }
 
     m_stopManager.set_stop_less_by_step();
 }
