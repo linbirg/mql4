@@ -46,6 +46,9 @@ class LongThrBollTrendStrategy : public AbstractStrategy
     bool may_short_by_day();
     bool may_long_by_day();
 
+    bool is_short_position();
+    bool is_long_position();
+
     void do_every_tick();
 
     // public:
@@ -169,15 +172,35 @@ string LongThrBollTrendStrategy::print_market_state()
 */
 void LongThrBollTrendStrategy::calcStopLoss()
 {
+    /**
+     *  如果持仓与大趋势不一致，移动止损。
+     *  如果月线与周线不一致，移动止损。
+     * 只有在月线周线一致且与持仓方向一致时，尽量长期持有。
+    */
+
+    // if ((m_boll1mn.is_long() || m_boll1mn.is_flat()) && m_boll1W.is_long() && is_long_position())
+    // {
+    //     m_stopManager.set_stop_less_by_step();
+    //     return;
+    // }
+
+    // if ((m_boll1mn.is_short() || m_boll1mn.is_flat()) && m_boll1W.is_short() && is_short_position())
+    // {
+    //     m_stopManager.set_stop_less_by_step();
+    //     return;
+    // }
+
     // 如果月线或者周线都为震荡，以移动止损为主。
     // 如果月线周线趋势相同，以步进止损为主。
-    if (m_boll1W.is_flat()) //&& m_boll1mn.is_flat() ||m_bollDay.is_flat()
-    {
-        m_stopManager.set_stop_less_by_boll();
-        return;
-    }
+    // if (m_boll1W.is_flat()) //&& m_boll1mn.is_flat() ||m_bollDay.is_flat()
+    // {
+    //     m_stopManager.set_stop_less_by_boll();
+    //     return;
+    // }
 
-    m_stopManager.set_stop_less_by_step();
+    // m_stopManager.set_stop_less_by_step();
+    // m_stopManager.set_stop_less_by_boll();
+    m_stopManager.set_stop_loss_greed_by_step();
 }
 
 /**
@@ -314,4 +337,22 @@ bool LongThrBollTrendStrategy::may_short()
 
     Print("月线和周线都不多，以日线为主。");
     return may_short_by_day();
+}
+
+/**
+ * 
+ * 当前总持仓是多头。
+*/
+bool LongThrBollTrendStrategy::is_long_position()
+{
+    return m_positionManager.get_curr_long_positions() > m_positionManager.get_curr_short_positions();
+}
+
+/**
+ * 
+ * 当前总持仓是空头。
+*/
+bool LongThrBollTrendStrategy::is_short_position()
+{
+    return m_positionManager.get_curr_long_positions() < m_positionManager.get_curr_short_positions();
 }
