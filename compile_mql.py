@@ -2,7 +2,7 @@ import os
 import subprocess
 
 MQL4_LOG = 'mql4.log'
-COMPILER_PATH = 'D:\\Program Files (x86)\\FXCM MetaTrader 4\\metaeditor.exe'
+COMPILER_PATH = 'C:\\Program Files (x86)\\FXCM MetaTrader4\\metaeditor.exe'
 MQL4_FILE = 'long-tri-boll-trend.mq4'
 
 # MQL4_FILE = 'tre_boll_trend.mq4'
